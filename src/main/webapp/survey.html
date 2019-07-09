@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="/lbd/survey" method="post">	<!-- ${pageContext.request.contextPath}/surveyServlet" -->	<!--"http://localhost:8080/lbd/surveyServlet"> -->
+First name:
+<input type="text" name="firstName"><br>
+Last name: 
+<input type="text" name="lastName"><br>
+University name:
+<input type="text" name="universityName"><br>
+Faculty:
+<input type="text" name="facultyName"><br>
+Degree: 
+<select name="degree">
+<option value="bachelor">Bachelor</option>
+<option value="master">Master</option>
+</select><br>
+
+Quality of courses and testing:			<!-- wiem ze brzydko ale nie bylo jeszcze JS -->
+<select name="quality">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+</select><br>
+Contact with teachers:
+<select name="contactWithTeachers">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+</select><br>
+Inclusion of work / practical experience:
+<select name="practicalExperience">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+</select><br>
+
+<button type="submit">Submit</button>
+</form>
+
+</body>
+</html>
