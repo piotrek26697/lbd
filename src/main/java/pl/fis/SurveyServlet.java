@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -13,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import pl.fis.logic.DataEntry;
 import pl.fis.logic.Degree;
@@ -27,6 +30,7 @@ public class SurveyServlet extends HttpServlet
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
 		PrintWriter writer = resp.getWriter();
+		resp.setContentType("text/html");
 		writer.println("<!DOCTYPE html>\r\n" + "<html>\r\n" + "<head>\r\n" + "<meta charset=\"UTF-8\">\r\n"
 				+ "<title>Insert title here</title>\r\n" + "</head>\r\n" + "<body>");
 
@@ -63,6 +67,7 @@ public class SurveyServlet extends HttpServlet
 
 		writer.println("Number of surveys: " + counter);
 		writer.println("</body></html>");
+		
 	}
 
 	@PostConstruct
@@ -77,6 +82,7 @@ public class SurveyServlet extends HttpServlet
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
+		req.getSession();
 		resp.sendRedirect("survey.html");
 	}
 
