@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import pl.fis.logic.AverageStats;
 import pl.fis.logic.DataEntry;
+import pl.fis.logic.MapSorter;
 
 @WebServlet("/download")
 public class DownloadServlet extends HttpServlet
@@ -23,6 +24,9 @@ public class DownloadServlet extends HttpServlet
 	{
 		@SuppressWarnings("unchecked")
 		Map<String, AverageStats> data = (Map<String, AverageStats>) getServletContext().getAttribute("map");
+		MapSorter<String, AverageStats> mapSorter = new MapSorter<>();
+		//MapSorter<String, AverageStats> mapSorter = new MapSorter<>();
+		Map<String, AverageStats> sortedData = mapSorter.sortByValue(data);
 
 		resp.setContentType("text/csv");
 		resp.setHeader("Content-Disposition", "attachement; filename=\"SurveysData.csv\"");
@@ -31,10 +35,9 @@ public class DownloadServlet extends HttpServlet
 
 		try (OutputStream outputStream = resp.getOutputStream())
 		{
-			for (Map.Entry<String, AverageStats> entry : data.entrySet())
+			for (Map.Entry<String, AverageStats> entry : sortedData.entrySet())
 			{
-				double avg = (entry.getValue().getQuality() + entry.getValue().getContactWithTeachers()
-						+ entry.getValue().getInclusionOfWork()) / 3;
+				double avg = entry.getValue().getOverall();
 
 				String line = entry.getKey() + ", " + entry.getValue().getQuality() + ", "
 						+ entry.getValue().getContactWithTeachers() + ", " + entry.getValue().getInclusionOfWork()

@@ -1,17 +1,40 @@
 package pl.fis.logic;
 
-public class AverageStats
+public class AverageStats implements Comparable<AverageStats>
 {
 	private double quality;
 	private double contactWithTeachers;
 	private double inclusionOfWork;
+	private double overall;
 	private double numberOfOpinions;
+
+	@Override
+	public int compareTo(AverageStats o)
+	{
+		if (overall > o.overall)
+			return 1;
+		else if (overall < o.overall)
+			return -1;
+		else
+			return 0;
+	}
+
+	public double getOverall()
+	{
+		return overall;
+	}
+
+	public void setOverall(double overall)
+	{
+		this.overall = overall;
+	}
 
 	public void makeAverage()
 	{
 		quality = quality / numberOfOpinions;
 		contactWithTeachers = contactWithTeachers / numberOfOpinions;
 		inclusionOfWork = inclusionOfWork / numberOfOpinions;
+		overall = (quality + contactWithTeachers + inclusionOfWork) / 3;
 	}
 
 	public double getQuality()
