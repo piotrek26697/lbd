@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import pl.fis.logic.DataEntry;
-import pl.fis.logic.Degree;
+import pl.fis.data.DataEntry;
+import pl.fis.data.Degree;
 
 @WebServlet("/survey")
 public class SurveyServlet extends HttpServlet
@@ -42,9 +42,9 @@ public class SurveyServlet extends HttpServlet
 		Degree degree;
 		
 		if (req.getParameter("degree").toLowerCase().equals("master"))
-			degree = Degree.master;
+			degree = Degree.MASTER;
 		else
-			degree = Degree.bachelor;
+			degree = Degree.BACHELOR;
 		DataEntry dataEntry = new DataEntry();
 		dataEntry.setFirstName(req.getParameter("firstName"));
 		dataEntry.setLastName(req.getParameter("lastName"));

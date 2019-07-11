@@ -1,6 +1,6 @@
-package pl.fis.logic;
+package pl.fis.data;
 
-public class AverageStats implements Comparable<AverageStats>
+public class AverageStats extends Stats implements Comparable<AverageStats>
 {
 	private double quality;
 	private double contactWithTeachers;
@@ -27,14 +27,6 @@ public class AverageStats implements Comparable<AverageStats>
 	public void setOverall(double overall)
 	{
 		this.overall = overall;
-	}
-
-	public void makeAverage()
-	{
-		quality = quality / numberOfOpinions;
-		contactWithTeachers = contactWithTeachers / numberOfOpinions;
-		inclusionOfWork = inclusionOfWork / numberOfOpinions;
-		overall = (quality + contactWithTeachers + inclusionOfWork) / 3;
 	}
 
 	public double getQuality()

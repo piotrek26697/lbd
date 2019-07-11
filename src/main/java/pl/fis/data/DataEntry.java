@@ -1,4 +1,4 @@
-package pl.fis.logic;
+package pl.fis.data;
 
 public class DataEntry
 {

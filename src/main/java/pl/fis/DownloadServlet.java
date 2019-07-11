@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import pl.fis.logic.AverageStats;
-import pl.fis.logic.DataEntry;
+import pl.fis.data.AverageStats;
+import pl.fis.data.DataEntry;
 import pl.fis.logic.MapSorter;
 
 @WebServlet("/download")
@@ -23,7 +23,7 @@ public class DownloadServlet extends HttpServlet
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
 		@SuppressWarnings("unchecked")
-		Map<String, AverageStats> data = (Map<String, AverageStats>) getServletContext().getAttribute("map");
+		Map<String, AverageStats> data = (Map<String, AverageStats>) getServletContext().getAttribute("averageMap");
 		MapSorter<String, AverageStats> mapSorter = new MapSorter<>();
 		//MapSorter<String, AverageStats> mapSorter = new MapSorter<>();
 		Map<String, AverageStats> sortedData = mapSorter.sortByValue(data);
