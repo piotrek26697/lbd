@@ -2,7 +2,6 @@ package pl.fis.beans;
 
 import java.util.Locale;
 
-import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 
@@ -61,7 +60,7 @@ public class CallerInfo
 	}
 
 //	@Produces
-//	@LanguageFormatter	TODO
+//	@LanguageFormatter
 	public Locale getUserLocale()
 	{
 		return userLocale;

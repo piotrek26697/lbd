@@ -35,7 +35,6 @@ public class PermissionFilter implements Filter
 		boolean permission = false;
 		String forbiddenURI, requestURI;
 		
-		String test = callerInfo.getName();
 		switch (callerInfo.getUserRole())
 		{
 		case ADMIN:

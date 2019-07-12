@@ -35,7 +35,7 @@ public class CredentialFilter implements Filter
 
 	@Inject
 	private UserInformationDataBase db;
-	
+
 	@Inject
 	private CallerInfo callerInfo;
 
@@ -73,31 +73,23 @@ public class CredentialFilter implements Filter
 						int p = credentials.indexOf(":");
 						if (p != -1)
 						{
-							boolean loginSuccess = false;
 							String _username = credentials.substring(0, p).trim();
 							String _password = credentials.substring(p + 1).trim();
-							List<User> list = db.getUsers();
-//		!!!!!!!!			Optional<User> user = list.stream()
-//								.filter(user -> _username.equals(user.getLogin()) && _password.equals(user.getPassword()))
-//								.findFirst();
-							for (User user : list)
+							User user = db.getUser(_username, _password);
+
+							if (user != null)
 							{
-								if (_username.equals(user.getLogin()) && _password.equals(user.getPassword()))
-								{
-									//req.getSession().setAttribute("loggedUser", user);
-									callerInfo.setId(System.currentTimeMillis());
-									callerInfo.setName(user.getName());
-									callerInfo.setLastName(user.getLastName());
-									callerInfo.setSessionID(req.getSession().getId());
-									callerInfo.setUserLocale(req.getLocale());
-									callerInfo.setUserRole(user.getUserRoles());
-									callerInfo.setIpAddress(req.getRemoteAddr());
-									loginSuccess = true;
-									chain.doFilter(request, response);
-									break;
-								}
-							}
-							if (!loginSuccess)
+								// req.getSession().setAttribute("loggedUser", user);
+								callerInfo.setId(System.currentTimeMillis());
+								callerInfo.setName(user.getName());
+								callerInfo.setLastName(user.getLastName());
+								callerInfo.setSessionID(req.getSession().getId());
+								callerInfo.setUserLocale(req.getLocale());
+								callerInfo.setUserRole(user.getUserRoles());
+								callerInfo.setIpAddress(req.getRemoteAddr());
+								chain.doFilter(request, response);
+
+							} else
 								unauthorized(resp, "Bad credentials");
 
 						} else

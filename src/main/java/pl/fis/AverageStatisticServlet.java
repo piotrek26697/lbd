@@ -32,7 +32,7 @@ public class AverageStatisticServlet extends HttpServlet
 	@Inject
 	private Calculator calculator;
 	
-//	@LanguageFormatter	TODO
+//	@LanguageFormatter
 //	@Inject
 //	private Locale locale;
 
@@ -67,6 +67,7 @@ public class AverageStatisticServlet extends HttpServlet
 		writer.println("<button type=\"submit\">Download</button>");
 		writer.println("</form>");
 		writer.println("</body></html>");
+		formatter.close();
 	}
 
 }
