@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import pl.fis.beans.SurveyManager;
 import pl.fis.data.DataEntry;
 import pl.fis.data.Degree;
 
@@ -26,48 +27,38 @@ public class SurveyServlet extends HttpServlet
 	@Inject
 	private ServletContext servletContext;
 
+	@Inject
+	private SurveyManager surveyManagerBean;
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
 		PrintWriter writer = resp.getWriter();
+
 		resp.setContentType("text/html");
 		writer.println("<!DOCTYPE html>\r\n" + "<html>\r\n" + "<head>\r\n" + "<meta charset=\"UTF-8\">\r\n"
 				+ "<title>Insert title here</title>\r\n" + "</head>\r\n" + "<body>");
 
-		writer.println("Thanks " + req.getParameter("firstName") + " " + req.getParameter("lastName") + " "
-				+ "for participating " + "in our university survey.<br>Your answers:<br>"
-				+ req.getParameter("universityName") + "<br>" + req.getParameter("facultyName") + "<br>"
-				+ req.getParameter("degree") + "<br>");
+		Boolean voteForbidden = (Boolean) req.getSession().getAttribute("voteForbidden");
+		if(voteForbidden == null)
+			voteForbidden = false;
+		if (voteForbidden)
+		{
+			writer.println("You have already submitted your survey");
+		} else
+		{
+			writer.println("Thanks " + req.getParameter("firstName") + " " + req.getParameter("lastName") + " "
+					+ "for participating " + "in our university survey.<br>Your answers:<br>"
+					+ req.getParameter("universityName") + "<br>" + req.getParameter("facultyName") + "<br>"
+					+ req.getParameter("degree") + "<br>");
 
-		Degree degree;
-		
-		if (req.getParameter("degree").toLowerCase().equals("master"))
-			degree = Degree.MASTER;
-		else
-			degree = Degree.BACHELOR;
-		DataEntry dataEntry = new DataEntry();
-		dataEntry.setFirstName(req.getParameter("firstName"));
-		dataEntry.setLastName(req.getParameter("lastName"));
-		dataEntry.setUniversityName(req.getParameter("universityName").toUpperCase());
-		dataEntry.setFacultyName(req.getParameter("facultyName"));
-		dataEntry.setDegree(degree);
-		dataEntry.setQuality(Integer.parseInt(req.getParameter("quality")));
-		dataEntry.setContactWithTeachers(Integer.parseInt(req.getParameter("contactWithTeachers")));
-		dataEntry.setInclusionOfWork(Integer.parseInt(req.getParameter("practicalExperience")));
+			surveyManagerBean.saveAnswers(req.getParameterMap());
 
-		@SuppressWarnings("unchecked")
-		List<DataEntry> dataList = (List<DataEntry>) servletContext.getAttribute("list");
+			writer.println("Number of surveys: " + servletContext.getAttribute("counter"));
 
-		Integer counter = (Integer) servletContext.getAttribute("counter");
-
-		dataList.add(dataEntry);
-		counter++;
-		servletContext.setAttribute("list", dataList);
-		servletContext.setAttribute("counter", counter);
-
-		writer.println("Number of surveys: " + counter);
+			req.getSession().setAttribute("voteForbidden", true);
+		}
 		writer.println("</body></html>");
-		
 	}
 
 	@PostConstruct
@@ -82,7 +73,7 @@ public class SurveyServlet extends HttpServlet
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
-		//req.getSession();
+		// req.getSession();
 		resp.sendRedirect("survey.html");
 	}
 

@@ -2,9 +2,9 @@ package pl.fis;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Formatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -18,9 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 import pl.fis.data.AverageStats;
 import pl.fis.data.DataEntry;
 import pl.fis.data.Stats;
-import pl.fis.logic.AverageCalculator;
 import pl.fis.logic.Calculator;
 import pl.fis.qualifiers.Average;
+import pl.fis.qualifiers.LanguageFormatter;
 
 @WebServlet("/average-statistics")
 public class AverageStatisticServlet extends HttpServlet
@@ -31,6 +31,10 @@ public class AverageStatisticServlet extends HttpServlet
 	@Average
 	@Inject
 	private Calculator calculator;
+	
+//	@LanguageFormatter	TODO
+//	@Inject
+//	private Locale locale;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException

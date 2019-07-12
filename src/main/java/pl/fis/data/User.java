@@ -5,10 +5,26 @@ public class User
 	private int id;
 	private String name;
 	private String lastName;
+	private String login;
+	private String password;
 	private UserRoles userRoles;
-	private String userLanguage;
-	private String sessionID;
-	private String ipAddress; // what type?
+	
+	public String getLogin()
+	{
+		return login;
+	}
+	public void setLogin(String login)
+	{
+		this.login = login;
+	}
+	public String getPassword()
+	{
+		return password;
+	}
+	public void setPassword(String password)
+	{
+		this.password = password;
+	}
 	public int getId()
 	{
 		return id;
@@ -40,30 +56,6 @@ public class User
 	public void setUserRoles(UserRoles userRoles)
 	{
 		this.userRoles = userRoles;
-	}
-	public String getUserLanguage()
-	{
-		return userLanguage;
-	}
-	public void setUserLanguage(String userLanguage)
-	{
-		this.userLanguage = userLanguage;
-	}
-	public String getSessionID()
-	{
-		return sessionID;
-	}
-	public void setSessionID(String sessionID)
-	{
-		this.sessionID = sessionID;
-	}
-	public String getIpAddress()
-	{
-		return ipAddress;
-	}
-	public void setIpAddress(String ipAddress)
-	{
-		this.ipAddress = ipAddress;
 	}
 
 }

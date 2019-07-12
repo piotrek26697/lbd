@@ -15,6 +15,26 @@
 		<url-pattern>/median-statistics</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
+		<filter-name>credentialFilter</filter-name>
+		<url-pattern>/user-monitor</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>permissionFilter</filter-name>
+		<url-pattern>/median-statistics</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>permissionFilter</filter-name>
+		<url-pattern>/average-statistics</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>permissionFilter</filter-name>
+		<url-pattern>/download</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>permissionFilter</filter-name>
+		<url-pattern>/user-monitor</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
 		<filter-name>informationFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
