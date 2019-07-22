@@ -1,9 +1,11 @@
 package pl.fis.beans;
 
+import java.text.NumberFormat;
 import java.util.Locale;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
+import javax.swing.text.NumberFormatter;
 
 import pl.fis.data.UserRoles;
 import pl.fis.qualifiers.LanguageFormatter;
@@ -59,11 +61,14 @@ public class CallerInfo
 		this.userRole = userRole;
 	}
 
-//	@Produces
-//	@LanguageFormatter
-	public Locale getUserLocale()
+	@Produces
+	@LanguageFormatter
+	public NumberFormat getFormatter()
 	{
-		return userLocale;
+		if (userLocale != null)
+			return NumberFormat.getNumberInstance(userLocale);
+		else
+			return NumberFormat.getNumberInstance();
 	}
 
 	public void setUserLocale(Locale userLocale)
